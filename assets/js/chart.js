@@ -63,6 +63,7 @@ function processData(allText) {
     allTextLines.shift()
     var dat = []
     var coord = {}
+    var max = 0
     //var headings = entries.splice(0,record_num);
     while (allTextLines.length>0) {
         entries =  splitCSVButIgnoreCommasInDoublequotes(allTextLines[0])
@@ -91,6 +92,9 @@ function processData(allText) {
                     sum = num;
                 }
             }
+            if (sum > max){
+                max = sum
+            }
             if (!Number.isNaN(loc[0]) && !Number.isNaN(loc[1])) {
                 dat.push({name: _name, value:sum})
                 coord[_name] = loc
@@ -98,7 +102,7 @@ function processData(allText) {
         }
         allTextLines.shift()
     }
-    return [dat, coord]
+    return [dat, coord, max]
     
 };
 
@@ -117,15 +121,16 @@ var convertData = function (data, geoCoordMap) {
     console.log(res)
     return res;
 };
-
+url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"
 $.ajax({
     type: "GET",
-    url: "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv",
+    url: url,
     dataType: "text",
     success: function(data) {
 		var values = processData(data);
 		var data = values[0]
 		var geoCoordMap = values[1]
+        var max = values[2]
         console.log(data)
         console.log(geoCoordMap)
 
@@ -149,7 +154,7 @@ $.ajax({
         			if (params.value=='-'){
         				return '-';
         			}else{
-        				return "Lokasi LOL : "+params.name + '<br/>Magnitude : ' + value;
+        				return "Location: "+params.name + '<br/>Total : ' + value;
         			}
                 }
             },
@@ -158,7 +163,7 @@ $.ajax({
                 x : 'right',
                 y : 'top',
                 min: 0.0,
-                max: 4000,
+                max: max,
         		precision:1,
         		formatter : function(v, v2){
                     return v + " SR - "+v2+" SR"
@@ -177,6 +182,14 @@ $.ajax({
                     fontFamily : "'Lora', serif",
                 }
             },
+            visualMap: {
+                show: false,
+                min: 0,
+                max: max,
+                inRange: {
+                    symbolSize: [6, 60]
+                }
+            },
             geo: {
                 map: 'world',
                 label: {
@@ -184,7 +197,7 @@ $.ajax({
                         show: false
                     }
                 },
-                roam: false,
+                roam: true,
                 itemStyle: {
                     normal: {
                         areaColor: '#333',
