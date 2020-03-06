@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Persebaran Gempa di Indonesia Tahun 2014 </title>
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
+	<link href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" rel="stylesheet"/>
+	<link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="assets/js/echarts.min.js"></script>
+	
+</head>
+<body>
+	<div class="container">
+		<div class="header row">
+			<div class="title col-md-12">
+				<h1>Persebaran <b>Gempa</b> di Indonesia Tahun 2014 </h1>
+			</div>
+			<!--<div class="description col-md-6">
+				<p>
+					Korupsi merupakan salah satu persoalan terbesar bangsa Indonesia.
+					Rata-rata kerugian negara akibat korupsi mencapai 11 triliun per tahun.
+					Sebenarnya wilayah apa saja yang banyak terlibat kasus korupsi?
+				</p>
+			</div>-->
+		</div>
+		<div class="main row">
+			<div class="col-md-12">
+				<div id="map"></div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			 <span class="sumber-data">sumber data : http://geospasial.bnpb.go.id/pantauanbencana/data/datagempaall.php</span>
+		</div>
+		
+		<div class="secondary row">
+		
+			<div class="col-md-4">
+				<div id="topfive-chart" class="bar-chart"></div>
+			</div>
+		  <div class="col-md-4">
+			<br>
+			<br>
+				<p style= "font-size : 15px;text-align:justify;margin-top:20px">
+				Indonesia merupakan negara yang dikenal sering terjadi gempa bumi. Hal ini dikarenakan letak Indonesia yang dilalui oleh cincin api pasifik (<i>ring of fire</i>). Cincin api pasifik adalah daerah yang sering mengalami gempa bumi dan letusan gunung berapi yang mengelilingi cekungan Samudra Pasifik. Daerah ini berbentuk seperti tapal kuda dan mencakup wilayah sepanjang 40.000 km. Ring of fire ini terjadi akibat pertemuan lempeng tektonik dan tumbukan dari lempeng litosfer bumi. 81% gempa besar di dunia terjadi di sepanjang cincin api pasifik.</p>
+<p style="font-size : 15px;text-align:justify">Gempa bumi jarang terjadi di Kalimantan karena letaknya yang terbebas dari pertemuan lempeng tektonik. Pertemuan lempeng tektonik ini biasanya menyebabkan gempa bumi. Gempa bumi di Indonesia paling banyak terjadi di Kepulauan Maluku. Meskipun Kalimantan terbebas dari gempa bumi tektonik, tetap saja harus tetap waspada karena bisa saja terjadi gempa bumi yang disebabkan oleh penyebab lain, seperti pergeseran lempeng itu sendiri.
+
+
+				</p>
+			</div>
+			<div class="col-md-4">
+				<div id="pulau-chart" class="bar-chart"></div>
+				
+			</div>
+
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="assets/js/chart.js"></script>
+	
+</body>
+</html>

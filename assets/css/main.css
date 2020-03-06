@@ -1,0 +1,65 @@
+body {
+	font-family: 'Lora', serif;
+	background-color: #eee;
+}
+
+h1 {
+	font-weight: 700;
+}
+
+b {
+	color: #b20e10;
+}
+.col-md-12 {
+	padding-left:10px;
+	padding-right:10px;
+}
+.container {
+	background-color:#fcfcfc;
+	padding-left:20px;
+	padding-right:20px;
+}
+.secondary {
+	height:600px;
+}
+.col-md-4 {
+	height: 600px;
+}
+.header {
+text-align:center;
+}
+
+.header .description {
+	padding-top: 20px;
+}
+
+.main {
+
+}
+
+.secondary {
+	padding : 20px 0;
+}
+
+.sumber-data{
+	color : #aaa;
+	font-size : 12px;
+}
+#map {
+	height: 400px;
+	width: 100%;
+	border: 2px solid #333;
+	background-color : #C2DFFF!important;
+}
+
+@media (min-width: 992px) {
+	#map {
+		height: 600px;
+		width: 100%;
+	}
+}
+
+.bar-chart {
+	height: 600px;
+	width: 100%;
+}
