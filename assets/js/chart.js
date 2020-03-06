@@ -102,7 +102,7 @@ function processData(allText) {
     
 };
 
-var convertData = function (data) {
+var convertData = function (data, geoCoordMap) {
     var res = [];
 //  alert(JSON.stringify(data))
     for (var i = 0; i < data.length; i++) {
@@ -200,7 +200,7 @@ $.ajax({
                     name: 'pm2.5',
                     type: 'scatter',
                     coordinateSystem: 'geo',
-                    data: convertData(data),
+                    data: convertData(data, geoCoordMap),
                     symbolSize: function (v){
         					return Math.sqrt(v[2])
                         },
@@ -226,7 +226,7 @@ $.ajax({
                     coordinateSystem: 'geo',
                     data: convertData(data.sort(function (a, b) {
                         return b.value - a.value;
-                    }).slice(0, 6)),
+                    }).slice(0, 6), geoCoordMap),
                     symbolSize: function (v){
         					return Math.sqrt(v[2])
                         },
