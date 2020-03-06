@@ -178,7 +178,7 @@ $.ajax({
                 }
             },
             geo: {
-                map: 'INDONESIA',
+                map: 'world',
                 label: {
                     emphasis: {
                         show: false
@@ -567,7 +567,7 @@ $.ajax({
     		
 		$.get('assets/js/geojson.json', function (geoJson) {
 
-			echarts.registerMap('INDONESIA', geoJson);
+			echarts.registerMap('world', geoJson);
 			var mapChart = echarts.init(document.getElementById('map'));
             mapChart.setOption(mapOption);
 		});
