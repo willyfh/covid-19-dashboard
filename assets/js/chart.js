@@ -434,7 +434,7 @@ var convertData = function (data) {
 };
 
 var mapOption = {
-    backgroundColor: '#404a59',
+    backgroundColor: '#D9E212',
     title : {
         text: '',
         subtextStyle : {
