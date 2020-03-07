@@ -170,9 +170,9 @@ $.ajax({
         		precision:1,
         		formatter : function(v, v2){
                     if (v2 != "Infinity") {
-                        return v + " - "+v2
+                        return v + " - "+v2 + " cases"
                     } else {
-                        return v + "+"
+                        return v + "+ cases"
                     }
                 },
         		
