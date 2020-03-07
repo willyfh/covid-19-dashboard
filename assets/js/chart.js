@@ -166,9 +166,15 @@ var convertData = function(data, geoCoordMap) {
     }
     return res;
 };
+
+function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
+
 var url_confirmed = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"
 var url_death = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv"
 var url_recovered = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv"
+
 $.ajax({
     type: "GET",
     url: url_confirmed,
@@ -255,7 +261,7 @@ $.ajax({
                                     if (params.value == '-') {
                                         return '-';
                                     } else {
-                                        return params.name + '<br/>Confirmed : <span class="red">' + value+ '</span><br/>Recovered : <span class="green">' + recovered_data[params.name]+ '</span><br/>Deaths : <span class="dimgray">' + death_data[params.name]+"</span>";
+                                        return params.name + '<br/>Confirmed : <span class="red">' + formatNumber(value)+ '</span><br/>Recovered : <span class="green">' + formatNumber(recovered_data[params.name])+ '</span><br/>Deaths : <span class="dimgray">' + formatNumber(death_data[params.name])+"</span>";
                                     }
                                 }
                             },
@@ -418,50 +424,35 @@ $.ajax({
                         scatterPlot.setOption(option);
 
                         var confirmed_count = document.getElementById("total-confirmed-count")
-                        confirmed_count.innerHTML = total_confirmed
+                        confirmed_count.innerHTML = formatNumber(total_confirmed)
 
                         var death_count = document.getElementById("total-death-count")
-                        death_count.innerHTML = total_death
+                        death_count.innerHTML = formatNumber(total_death)
 
                         var recovered_count = document.getElementById("total-recovered-count")  
-                        recovered_count.innerHTML = total_recovered
+                        recovered_count.innerHTML = formatNumber(total_recovered)
 
                         var confirmed_changes = document.getElementById("total-confirmed-changes-count")
-                        confirmed_changes.innerHTML = "+"+total_confirmed_changes
+                        confirmed_changes.innerHTML = "+"+formatNumber(total_confirmed_changes)
 
                         var death_changes = document.getElementById("total-death-changes-count")
-                        death_changes.innerHTML = "+"+total_death_changes
+                        death_changes.innerHTML = "+"+formatNumber(total_death_changes)
 
                         var recovered_changes = document.getElementById("total-recovered-changes-count")  
-                        recovered_changes.innerHTML = "+"+total_recovered_changes
+                        recovered_changes.innerHTML = "+"+formatNumber(total_recovered_changes)
 
                         var infected_count = document.getElementById("total-infected-count")  
-                        infected_count.innerHTML = total_infected_count
+                        infected_count.innerHTML = formatNumber(total_infected_count)
 
                         var infected_changes = document.getElementById("total-infected-changes-count")
-                        infected_changes.innerHTML = "+"+infected_count_changes
+                        infected_changes.innerHTML = "+"+formatNumber(infected_count_changes)
 
                         for (var i=1; i <= 10; i++) {
                             var country_count = document.getElementById("country-count-"+i)
                             var country_name = document.getElementById("country-name-"+i)
-                            country_count.innerHTML = sortedCountries[i][1]
-                            country_name.innerHTML = sortedCountries[i][0]
+                            country_count.innerHTML = formatNumber(sortedCountries[i-1][1])
+                            country_name.innerHTML = sortedCountries[i-1][0]
                         }
-
-                        // var mapChart = ec.init(document.getElementById('map'));
-                        //mapChart.setOption(mapOption);
-                        /*
-                                var topfiveChart = echarts.init(document.getElementById('topfive-chart'));
-                                topfiveChart.setOption(topfiveOption);
-
-                                var pulauChart = echarts.init(document.getElementById('pulau-chart'));
-                                pulauChart.setOption(pulauOption);
-                        */
-                        /*
-                                var institutionChart = ec.init(document.getElementById('institution-chart'));
-                                institutionChart.setOption(institutionOption);*/
-
-
                     
                 });
             
