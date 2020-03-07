@@ -441,7 +441,14 @@ $.ajax({
                             country_name.innerHTML = sortedCountries[i-1][0]
                         }
                     
+                }).fail(function() {
+                    alert("Failed to retrieve data.");
                 });
             
+        }).fail(function() {
+            alert("Failed to retrieve data.");
         });
+        
+}).fail(function() {
+    alert("Failed to retrieve data.");
 });
