@@ -8,7 +8,6 @@
 
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
-	<link href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" rel="stylesheet"/>
 	<link href="assets/css/main.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -37,8 +36,8 @@
 		<div class="main row">
 			<div class="col-md-12">
 				<div id="map"></div>
-					<div class='total'>
-						<div class='total-title'>Total</div>
+					<div class='box'>
+						<!--<div class='box-title'>Total</div>-->
 						<div class='total-content'>
 								<div class='total-confirmed'>
 										<div class='total-confirmed-label'>
@@ -77,6 +76,10 @@
 										</div>
 								</div>
 							</div>
+						</div> <!-- end total -->
+						<div class='box'>
+								<div class='box-title'>Last 30 Days (Cumulative)</div>
+								<div id="scatter-plot" class="scatter-plot"></div>
 						</div>
 				</div>
 			</div>

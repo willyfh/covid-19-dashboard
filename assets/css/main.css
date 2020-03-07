@@ -14,10 +14,8 @@ b {
     padding-left:10px;
 	padding-right:10px;
 }
-.container {
-    background-color:#fcfcfc;
-    padding-left:20px;
-    padding-right:20px;
+.outer-container {
+    min-width: 1500px;
 }
 .secondary {
     height:600px;
@@ -37,6 +35,7 @@ b {
     color: #eee;
     padding: 10px;
     font-size : 25px;
+    width:  100%;
 }
 .main {
 
@@ -44,7 +43,7 @@ b {
 
 
 
-.total, .total-death, .total-confirmed, .total-recovered {
+.box, .total-death, .total-confirmed, .total-recovered {
     float:left;
     color : #eee;
     text-align: center;
@@ -52,11 +51,12 @@ b {
 .total-death, .total-confirmed, .total-recovered {
     width:  160px
 }
-.total {
+.box {
     margin: 10px;
+    width:  500px;
 }
 
-.total-title {
+.box-title {
     background-color: #333;
     font-size: 16px;
     font-size: 20px;
@@ -105,6 +105,7 @@ b {
 #map {
     height: 600px;
     width: 100%;
+    margin-top:-2px;
     border: 2px solid #333;
     max-width: 1000px;
     float: left;
@@ -116,4 +117,9 @@ b {
 .bar-chart {
     height: 600px;
     width: 100%;
+}
+.scatter-plot {
+    float: left;
+    height: 300px;
+    width:  500px;
 }
