@@ -62,6 +62,7 @@ function processData(allText) {
     var dat_dict = {}
     var coord = {}
     var max = 0
+    var sum = 0.0
     //var headings = entries.splice(0,record_num);
     while (allTextLines.length > 0) {
         entries = splitCSVButIgnoreCommasInDoublequotes(allTextLines[0])
@@ -83,28 +84,30 @@ function processData(allText) {
             var loc = []
             loc.unshift(parseFloat(entries.shift()))
             loc.unshift(parseFloat(entries.shift()))
-            var sum = 0.0
+            var latest = 0.0
             for (var j = 4; j < record_num; j++) {
                 num = parseFloat(entries.shift())
                 if (Number.isNaN(num) == false) {
-                    sum = num;
+                    latest = num;
                 }
             }
-            if (sum > max) {
-                max = sum
+            if (latest > max) {
+                max = latest
             }
             if (!Number.isNaN(loc[0]) && !Number.isNaN(loc[1])) {
                 dat.push({
                     name: _name,
-                    value: sum
+                    value: latest
                 })
-                dat_dict[_name] = sum
+                dat_dict[_name] = latest
                 coord[_name] = loc
+
+                sum += latest
             }
         }
         allTextLines.shift()
     }
-    return [dat, coord, max, dat_dict]
+    return [dat, coord, max, dat_dict, sum]
 
 };
 
@@ -146,12 +149,15 @@ $.ajax({
                         var data = values[0]
                         var geoCoordMap = values[1]
                         var max = values[2]
+                        var total_confirmed = values[4]
 
                         var values = processData(death);
                         var death_data = values[3]
+                        var total_death = values[4]
 
                         var values = processData(recovered);
                         var recovered_data = values[3]
+                        var total_recovered = values[4]
 
                         console.log(recovered_data)
 
@@ -340,6 +346,14 @@ $.ajax({
                         var scatterPlot = echarts.init(document.getElementById('scatter-plot'));
                         scatterPlot.setOption(option);
 
+                        var confirmed_count = document.getElementById("total-confirmed-count")
+                        confirmed_count.innerHTML = total_confirmed
+
+                        var death_count = document.getElementById("total-death-count")
+                        death_count.innerHTML = total_death
+
+                        var recovered_count = document.getElementById("total-recovered-count")  
+                        recovered_count.innerHTML = total_recovered
 
                         // var mapChart = ec.init(document.getElementById('map'));
                         //mapChart.setOption(mapOption);
