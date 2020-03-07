@@ -10,9 +10,9 @@ h1 {
 b {
   color: #b20e10;
 }
-
-.outer-container {}
-
+.outer-container {
+  min-width: 720px;
+}
 .row {
   margin-left: 0;
   margin-right: 0;
@@ -173,11 +173,6 @@ td.country-count {
   border: 2px solid #333;
   max-width: 1000px;
   float: left;
-}
-
-.container {
-  max-width: 100%;
-  background-color: transparent;
 }
 
 .bar-chart {
