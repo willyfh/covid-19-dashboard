@@ -1,7 +1,7 @@
 /* TODO refactor and cleanup the code */
 
 
-function splitCSVButIgnoreCommasInDoublequotes(str) {
+function splitCSV(str) {
     //split the str first  
     //then merge the elments between two double quotes  
     var delimiter = ',';
@@ -41,7 +41,7 @@ function splitCSVButIgnoreCommasInDoublequotes(str) {
 function processData(allText) {
 
     var allTextLines = allText.split(/\r\n|\n/);
-    var entries = splitCSVButIgnoreCommasInDoublequotes(allTextLines[0])
+    var entries = splitCSV(allTextLines[0])
 
     var record_num = entries.length;
     var lines = [];
@@ -61,7 +61,7 @@ function processData(allText) {
     for (var i = 0; i < 30; i++) last_30_days_sums[i] = 0;
 
     while (allTextLines.length > 0) {
-        entries = splitCSVButIgnoreCommasInDoublequotes(allTextLines[0])
+        entries = splitCSV(allTextLines[0])
         
         var tarr = [];
         var prov = entries.shift()
