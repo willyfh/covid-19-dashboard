@@ -138,13 +138,15 @@ $.ajax({
         var mapOption = {
             backgroundColor: '#111',
 
-            title : {
-                text: '',
-                subtextStyle : {
-                    fontFamily : "'Lora', serif",
-        			color :'#ccc'
-                }
-            },
+            title: {
+            text: 'Confirmed Case Map',
+            subtext: 'Data source: https://github.com/CSSEGISandData/COVID-19',
+            top: 10,
+            left: 10,
+            textStyle: {
+                color: '#eee'
+            }
+        },
             tooltip : {
                 trigger: 'item',
                 showDelay: 0,
