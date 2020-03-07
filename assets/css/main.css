@@ -116,8 +116,10 @@ td.country-count {
 .secondary {
     padding : 20px 0;
 }
-
 .footer {
+  padding: 10px;
+}
+.credits {
     color : #aaa;
     font-size : 12px;
 }
