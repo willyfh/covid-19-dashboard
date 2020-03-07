@@ -1,17 +1,6 @@
-/*require.config({
-    packages: [
-        {
-            name: 'echarts',
-            location: 'https://cdn.rawgit.com/ecomfe/echarts/master/src',
-            main: 'echarts'
-        },
-        {
-            name: 'zrender',
-            location: '//ecomfe.github.io/zrender/src',
-            main: 'zrender'
-        }
-    ]
-});*/
+/* TODO refactor and cleanup the code */
+
+
 function splitCSVButIgnoreCommasInDoublequotes(str) {
     //split the str first  
     //then merge the elments between two double quotes  
@@ -50,7 +39,7 @@ function splitCSVButIgnoreCommasInDoublequotes(str) {
 }
 
 function processData(allText) {
-    //var record_num = 5;  // or however many elements there are in each row
+
     var allTextLines = allText.split(/\r\n|\n/);
     var entries = splitCSVButIgnoreCommasInDoublequotes(allTextLines[0])
 
@@ -70,7 +59,7 @@ function processData(allText) {
     var last_week_infected_countries = {}
     var last_30_days_sums = []
     for (var i = 0; i < 30; i++) last_30_days_sums[i] = 0;
-    //var headings = entries.splice(0,record_num);
+
     while (allTextLines.length > 0) {
         entries = splitCSVButIgnoreCommasInDoublequotes(allTextLines[0])
         
@@ -300,8 +289,6 @@ $.ajax({
                                     }
                                 ],
                                 color: ['darkred', 'orangered', 'orange', 'yellow'],
-
-                                //text:['8.0 SR','4.0 SR'],
 
                                 calculable: false,
                                 textStyle: {
