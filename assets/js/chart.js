@@ -141,7 +141,7 @@ $.ajax({
                 text: '',
                 subtextStyle : {
                     fontFamily : "'Lora', serif",
-        			color :'#333'
+        			color :'#ccc'
                 }
             },
             tooltip : {
@@ -150,7 +150,7 @@ $.ajax({
                 transitionDuration: 0.2,
         	
                 formatter : function (params) {
-                    var value = (params.value[2] + ' SR');
+                    var value = (params.value[2]);
         			if (params.value=='-'){
         				return '-';
         			}else{
@@ -166,13 +166,22 @@ $.ajax({
                 max: max,
         		precision:1,
         		formatter : function(v, v2){
-                    return v + " SR - "+v2+" SR"
+                    if (v2 != "Infinity") {
+                        return v + " - "+v2
+                    } else {
+                        return v + "+"
+                    }
                 },
         		
         		selectedMode:true,
         		hoverLink : true,
         		realtime : true,
-        		splitNumber : 4,
+        		splitList : [
+                    {start:0,end:10},
+                    {start:10,end:49},
+                    {start:50,end:99},
+                    {start:100}
+                ],
                 color: ['darkred','red','orange','yellow'],
 
                //text:['8.0 SR','4.0 SR'],
@@ -180,14 +189,7 @@ $.ajax({
                 calculable : false,
                 textStyle : {
                     fontFamily : "'Lora', serif",
-                }
-            },
-            visualMap: {
-                show: false,
-                min: 0,
-                max: max,
-                inRange: {
-                    symbolSize: [6, 60]
+                    color : "#ccc"
                 }
             },
             geo: {
@@ -215,7 +217,7 @@ $.ajax({
                     coordinateSystem: 'geo',
                     data: convertData(data, geoCoordMap),
                     symbolSize: function (v){
-        					return Math.sqrt(v[2])
+        					return Math.pow(v[2], 1/4)*3
                         },
                     label: {
                         normal: {
