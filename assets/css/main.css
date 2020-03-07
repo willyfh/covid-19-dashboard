@@ -1,64 +1,119 @@
 body {
-	font-family: 'Lora', serif;
-	background-color: #eee;
+    font-family: 'Lora', serif;
+    background-color: #111;
 }
 
 h1 {
-	font-weight: 700;
+    font-weight: 700;
 }
 
 b {
-	color: #b20e10;
+    color: #b20e10;
 }
 .col-md-12 {
-	padding-left:10px;
+    padding-left:10px;
 	padding-right:10px;
 }
 .container {
-	background-color:#fcfcfc;
-	padding-left:20px;
-	padding-right:20px;
+    background-color:#fcfcfc;
+    padding-left:20px;
+    padding-right:20px;
 }
 .secondary {
-	height:600px;
+    height:600px;
 }
 .col-md-4 {
-	height: 600px;
+    height: 600px;
 }
 .header {
-text-align:center;
+    text-align:center;
 }
 
 .header .description {
-	padding-top: 20px;
+    padding-top: 20px;
 }
-
+.title {
+    background-color: #333;
+    color: #eee;
+    padding: 10px;
+    font-size : 25px;
+}
 .main {
 
 }
 
+
+
+.total, .total-death, .total-confirmed, .total-recovered {
+    float:left;
+    color : #eee;
+    text-align: center;
+}
+.total-death, .total-confirmed, .total-recovered {
+    width:  160px
+}
+.total {
+    margin: 10px;
+}
+
+.total-title {
+    background-color: #333;
+    font-size: 16px;
+    font-size: 20px;
+    padding: 5px;
+}
+.total-content {
+    padding: 5px;
+}
+
+.total-death, .total-recovered {
+    border-left: 1px solid #eee;
+}
+.total-confirmed-count, .total-death-count, .total-recovered-count {
+    font-size:30px;
+}
+.total-confirmed-count {
+    color: red;
+}
+.total-death-count {
+    color: dimgray;
+}
+.total-recovered-count {
+    color: green;
+}
+.total-confirmed-changes, .total-death-changes, .total-recovered-changes {
+    margin-top:-5px;
+    font-size: 12px;
+}
+.total-confirmed-label, .total-death-label, .total-recovered-label {
+    font-size: 18px;
+}
+
+
+
+
+
+
 .secondary {
-	padding : 20px 0;
+    padding : 20px 0;
 }
 
 .data-source{
-	color : #aaa;
-	font-size : 12px;
+    color : #aaa;
+    font-size : 12px;
 }
 #map {
-	height: 400px;
-	width: 100%;
-	border: 2px solid #333;
+    height: 600px;
+    width: 100%;
+    border: 2px solid #333;
+    max-width: 1000px;
+    float: left;
 }
-
-@media (min-width: 992px) {
-	#map {
-		height: 600px;
-		width: 100%;
-	}
+.container {
+    max-width: 100%;
+    background-color: transparent;
 }
-
 .bar-chart {
-	height: 600px;
-	width: 100%;
+    height: 600px;
+    width: 100%;
 }

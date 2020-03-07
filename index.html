@@ -4,7 +4,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>COVID-19</title>
+	<title>Novel Coronavirus (COVID-19)</title>
 
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
@@ -21,10 +21,10 @@
 	
 </head>
 <body>
-	<div class="container">
-		<div class="header row">
+	<div class="outer-container">
+		<div class="header-bar">
 			<div class="title col-md-12">
-				<h1>COVID-19</h1>
+				Novel Coronavirus (COVID-19)
 			</div>
 			<!--<div class="description col-md-6">
 				<p>
@@ -37,33 +37,54 @@
 		<div class="main row">
 			<div class="col-md-12">
 				<div id="map"></div>
+					<div class='total'>
+						<div class='total-title'>Total</div>
+						<div class='total-content'>
+								<div class='total-confirmed'>
+										<div class='total-confirmed-label'>
+												confirmed cases
+										</div>
+										<div class='total-confirmed-count'>
+												100000
+										</div>
+										<div class='total-confirmed-changes'>
+												<div class='vs-prev-day-count'>+50</div>
+												<div class='vs-prev-day-label'>vs previous day</div>
+										</div>
+								</div>
+								<div class='total-recovered'>
+										<div class='total-recovered-label'>
+												recovered
+										</div>
+										<div class='total-recovered-count'>
+												50000
+										</div>
+										<div class='total-recovered-changes'>
+												<div class='vs-prev-day-count'>+50</div>
+												<div class='vs-prev-day-label'>vs previous day</div>
+										</div>
+								</div>
+								<div class='total-death'>
+										<div class='total-death-label'>
+												deaths
+										</div>
+										<div class='total-death-count'>
+												2000
+										</div>
+										<div class='total-death-changes'>
+												<div class='vs-prev-day-count'>+50</div>
+												<div class='vs-prev-day-label'>vs previous day</div>
+										</div>
+								</div>
+							</div>
+						</div>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-12">
 			 <span class="data-source">Data source : https://github.com/CSSEGISandData</span>
 		</div>
-		
-		<div class="secondary row">
-		
-			<div class="col-md-4">
-				<div id="topfive-chart" class="bar-chart"></div>
-			</div>
-		  <div class="col-md-4">
-			<br>
-			<br>
-				<p style= "font-size : 15px;text-align:justify;margin-top:20px">
-				Indonesia merupakan negara yang dikenal sering terjadi gempa bumi. Hal ini dikarenakan letak Indonesia yang dilalui oleh cincin api pasifik (<i>ring of fire</i>). Cincin api pasifik adalah daerah yang sering mengalami gempa bumi dan letusan gunung berapi yang mengelilingi cekungan Samudra Pasifik. Daerah ini berbentuk seperti tapal kuda dan mencakup wilayah sepanjang 40.000 km. Ring of fire ini terjadi akibat pertemuan lempeng tektonik dan tumbukan dari lempeng litosfer bumi. 81% gempa besar di dunia terjadi di sepanjang cincin api pasifik.</p>
-<p style="font-size : 15px;text-align:justify">Gempa bumi jarang terjadi di Kalimantan karena letaknya yang terbebas dari pertemuan lempeng tektonik. Pertemuan lempeng tektonik ini biasanya menyebabkan gempa bumi. Gempa bumi di Indonesia paling banyak terjadi di Kepulauan Maluku. Meskipun Kalimantan terbebas dari gempa bumi tektonik, tetap saja harus tetap waspada karena bisa saja terjadi gempa bumi yang disebabkan oleh penyebab lain, seperti pergeseran lempeng itu sendiri.
 
-
-				</p>
-			</div>
-			<div class="col-md-4">
-				<div id="pulau-chart" class="bar-chart"></div>
-				
-			</div>
-
-		</div>
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

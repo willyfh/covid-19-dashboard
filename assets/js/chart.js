@@ -182,7 +182,7 @@ $.ajax({
                     {start:50,end:99},
                     {start:100}
                 ],
-                color: ['darkred','red','orange','yellow'],
+                color: ['darkred','orangered','orange','yellow'],
 
                //text:['8.0 SR','4.0 SR'],
         		
