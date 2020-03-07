@@ -62,7 +62,8 @@ function processData(allText) {
     var dat_dict = {}
     var coord = {}
     var max = 0
-    var sum = 0.0
+    var sum = 0
+    var prevSum = 0
     //var headings = entries.splice(0,record_num);
     while (allTextLines.length > 0) {
         entries = splitCSVButIgnoreCommasInDoublequotes(allTextLines[0])
@@ -84,10 +85,12 @@ function processData(allText) {
             var loc = []
             loc.unshift(parseFloat(entries.shift()))
             loc.unshift(parseFloat(entries.shift()))
-            var latest = 0.0
+            var latest = 0
+            var prev = 0
             for (var j = 4; j < record_num; j++) {
                 num = parseFloat(entries.shift())
                 if (Number.isNaN(num) == false) {
+                    prev = latest
                     latest = num;
                 }
             }
@@ -103,11 +106,12 @@ function processData(allText) {
                 coord[_name] = loc
 
                 sum += latest
+                prevSum += prev
             }
         }
         allTextLines.shift()
     }
-    return [dat, coord, max, dat_dict, sum]
+    return [dat, coord, max, dat_dict, sum, sum-prevSum]
 
 };
 
@@ -150,14 +154,17 @@ $.ajax({
                         var geoCoordMap = values[1]
                         var max = values[2]
                         var total_confirmed = values[4]
+                        var total_confirmed_changes = values[5]
 
                         var values = processData(death);
                         var death_data = values[3]
                         var total_death = values[4]
+                        var total_death_changes = values[5]
 
                         var values = processData(recovered);
                         var recovered_data = values[3]
                         var total_recovered = values[4]
+                        var total_recovered_changes = values[5]
 
                         console.log(recovered_data)
 
@@ -354,6 +361,15 @@ $.ajax({
 
                         var recovered_count = document.getElementById("total-recovered-count")  
                         recovered_count.innerHTML = total_recovered
+
+                        var confirmed_changes = document.getElementById("total-confirmed-changes-count")
+                        confirmed_changes.innerHTML = "+"+total_confirmed_changes
+
+                        var death_changes = document.getElementById("total-death-changes-count")
+                        death_changes.innerHTML = "+"+total_death_changes
+
+                        var recovered_changes = document.getElementById("total-recovered-changes-count")  
+                        recovered_changes.innerHTML = "+"+total_recovered_changes
 
                         // var mapChart = ec.init(document.getElementById('map'));
                         //mapChart.setOption(mapOption);
