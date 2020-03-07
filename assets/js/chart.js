@@ -137,6 +137,7 @@ $.ajax({
 
         var mapOption = {
             backgroundColor: '#111',
+
             title : {
                 text: '',
                 subtextStyle : {
@@ -597,7 +598,10 @@ option = {
     },
     legend: {
         data: ['confirmed', 'recovered', 'deaths'],
-        bottom:10
+        bottom:10,
+        textStyle: {
+            color: '#eee'
+        }
     },
     grid: {
         top: 20,
@@ -609,25 +613,34 @@ option = {
     xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+        axisLabel: {
+            color: '#eee'
+        }
     },
     yAxis: {
-        type: 'value'
+        type: 'value',
+        axisLabel: {
+            color: '#eee'
+        }
     },
     series: [
         {
             name: 'confirmed',
             type: 'line',
+            color: 'red',
             data: [120, 132, 101, 134, 90, 230, 210]
         },
         {
             name: 'recovered',
             type: 'line',
+            color: 'green',
             data: [220, 182, 191, 234, 290, 330, 310]
         },
         {
             name: 'deaths',
             type: 'line',
+            color: 'dimgray',
             data: [150, 232, 201, 154, 190, 330, 410]
         }
     ]
