@@ -202,7 +202,6 @@ $.ajax({
                         for (var i = headers.length-1; i>= headers.length-30; i--) {
                             xlabels.unshift(headers[i])
                         }
-                        console.log(xlabels)
 
                         // exclude Others country
                         infected_countries['Others'] = 0
