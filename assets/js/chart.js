@@ -59,6 +59,7 @@ function processData(allText) {
     var headings = entries;
     allTextLines.shift()
     var dat = []
+    var dat_dict = {}
     var coord = {}
     var max = 0
     //var headings = entries.splice(0,record_num);
@@ -97,12 +98,13 @@ function processData(allText) {
                     name: _name,
                     value: sum
                 })
+                dat_dict[_name] = sum
                 coord[_name] = loc
             }
         }
         allTextLines.shift()
     }
-    return [dat, coord, max]
+    return [dat, coord, max, dat_dict]
 
 };
 
@@ -118,37 +120,40 @@ var convertData = function(data, geoCoordMap) {
             });
         }
     }
-    console.log(res)
     return res;
 };
-url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"
+var url_confirmed = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"
+var url_death = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv"
+var url_recovered = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv"
 $.ajax({
     type: "GET",
-    url: url,
-    dataType: "text",
-    success: function(confirmed_data) {
+    url: url_confirmed,
+    dataType: "text"
+}).done(function(confirmed) {
 
         $.ajax({
             type: "GET",
-            url: "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv",
-            dataType: "text",
-            success: function(death_data) {
+            url: url_death,
+            dataType: "text"
+        }).done(function(death) {
+             
                 $.ajax({
                     type: "GET",
-                    url: "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv",
-                    dataType: "text",
-                    success: function(recovered_data) {
-
-
-
-
-                        var values = processData(confirmed_data);
+                    url: url_recovered,
+                    dataType: "text"
+                }).done(function(recovered) {
+                        var values = processData(confirmed);
                         var data = values[0]
                         var geoCoordMap = values[1]
                         var max = values[2]
-                        console.log(data)
-                        console.log(geoCoordMap)
 
+                        var values = processData(death);
+                        var death_data = values[3]
+
+                        var values = processData(recovered);
+                        var recovered_data = values[3]
+
+                        console.log(recovered_data)
 
                         var mapOption = {
                             backgroundColor: '#111',
@@ -173,7 +178,7 @@ $.ajax({
                                     if (params.value == '-') {
                                         return '-';
                                     } else {
-                                        return "Location: " + params.name + '<br/>Total : ' + value;
+                                        return "Location: " + params.name + '<br/>Confirmed : <span class="red">' + value+ '</span><br/>Recovered : <span class="green">' + recovered_data[params.name]+ '</span><br/>Deaths : <span class="dimgray">' + death_data[params.name]+"</span>";
                                     }
                                 }
                             },
@@ -263,351 +268,8 @@ $.ajax({
                                         }
                                     }
                                 }
-                                /*,
-                                                {
-                                                    name: 'Top 5',
-                                                    type: 'effectScatter',
-                                                    coordinateSystem: 'geo',
-                                                    data: convertData(data.sort(function (a, b) {
-                                                        return b.value - a.value;
-                                                    }).slice(0, 6), geoCoordMap),
-                                                    symbolSize: function (v){
-                                                            return Math.sqrt(v[2])
-                                                        },
-                                                    showEffectOn: 'render',
-                                                    rippleEffect: {
-                                                        brushType: 'stroke'
-                                                    },
-                                                    hoverAnimation: true,
-                                                    label: {
-                                                        normal: {
-                                                            formatter: '{b}',
-                                                            position: 'right',
-                                                            show: false
-                                                        }
-                                                    },
-                                                    itemStyle: {
-                                                        normal: {
-                                                            color: '#f4e925',
-                                                            shadowBlur: 10,
-                                                            shadowColor: '#333'
-                                                        }
-                                                    },
-                                                    zlevel: 1
-                                                }*/
                             ]
                         };
-                        /*
-                        var topfiveOption = {
-                            title : {
-                                text: 'Lima Kasus Gempa Terbesar',
-                                subtext: 'Tahun 2014',
-                                textStyle : {
-                                    fontFamily : "'Lora', serif",
-                                    
-                                },
-                                subtextStyle : {
-                                    fontFamily : "'Lora', serif",
-                                }
-                            },
-                            tooltip : {
-                                trigger: 'item',
-                                formatter : function (params) {
-                                    var value = (params.value + ' SR');
-                                    return params.name + '<br/>' + value;
-                                },
-                                axisPointer : { 
-                                    type : 'shadow'
-                                },
-                            },
-                            toolbox: {
-                                show : false,
-                                feature : {
-                                    mark : {show: true},
-                                    dataView : {show: true, readOnly: false},
-                                    magicType: {show: true, type: ['bar']},
-                                    restore : {show: true},
-                                    saveAsImage : {show: true}
-                                }
-                            },
-                            calculable : true,
-                            xAxis : [
-                                {
-                                    type : 'value',
-                                    boundaryGap : [0, 0.01],
-                                    axisLabel : {
-                                        textStyle : {
-                                            fontFamily : "'Lora', serif",
-                                        }
-                                    },
-                                    axisLine : {
-                                        lineStyle : {
-                                            color : 'dimgray'
-                                        }
-                                    },
-                                    axisTick : {
-                                        show : false
-                                    }
-                                }
-                            ],
-                            yAxis : [
-                                {
-                                    type : 'category',
-                                    data : ['104 km \nBaratDaya \nKEBUMEN-\nJATENG','115 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT','135 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT','137 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT','132 km \nBaratLaut \nHALMAHERA\nBARAT-MALUT'],
-                                    axisLabel : {
-                                        textStyle : {
-                                            fontFamily : "'Lora', serif",
-                                        }
-                                    },
-                                    axisLine : {
-                                        lineStyle : {
-                                            color : 'dimgray'
-                                        }
-                                    },
-                                    axisTick : {
-                                        show : false
-                                    }
-                               }
-                            ],
-                            grid : {
-                                x : 100,
-                                x2 : 20,
-                            },
-                            series : [
-                                {
-                                    type:'bar',
-                                   data:[6.5,6.7,6.8,7.3,7.3],
-                                    itemStyle: {
-                                        normal:{color:'darkred'}
-                                    },
-                                }
-                            ]
-                        };
-
-                        var pulauOption = {
-                            title : {
-                                text: 'Jumlah Kasus Gempa Tiap Pulau',
-                                subtext: 'Tahun 2014',
-                                textStyle : {
-                                    fontFamily : "'Lora', serif",
-                                },
-                                subtextStyle : {
-                                    fontFamily : "'Lora', serif",
-                                }
-                            },
-                               tooltip : {
-                                trigger: 'item',
-                                formatter : function (params) {
-                                    var value = (params.value);
-                                    return params.name + '<br/>' + value;
-                                },
-                                axisPointer : { 
-                                    type : 'shadow'
-                                },
-                            },
-                          
-                            xAxis : [
-                                {
-                                    type : 'value',
-                                    boundaryGap : [0, 0.01],
-                                    axisLabel : {
-                                        textStyle : {
-                                            fontFamily : "'Lora', serif",
-                                        }
-                                    },
-                                    
-                                    axisLine : {
-                                        lineStyle : {
-                                            color : 'dimgray'
-                                        }
-                                    },
-                                    axisTick : {
-                                        show : false
-                                    }
-                                    
-                                }
-                            ],
-                            yAxis : [
-                                {
-                                    type : 'category',
-                                    data : ['Kalimantan','NTT-NTB','Jawa','Papua','Sulawesi','Sumatera','Maluku'],
-                                    axisLabel : {
-                                        textStyle : {
-                                            fontFamily : "'Lora', serif",
-                                        }
-                                    },
-                                    axisLine : {
-                                        lineStyle : {
-                                            color : 'dimgray'
-                                        }
-                                    },
-                                    axisTick : {
-                                        show : false
-                                    }
-                                    
-                               }
-                            ],
-                            grid : {
-                                x : 100,
-                                x2 : 20,
-                            },
-                            series : [
-                                {
-                                    type:'bar',
-                                    data:[0,8,18,20,36,48,71],
-                                    
-                                    itemStyle: {
-                                        normal:{color:'darkred'}
-                                    },
-                                }
-                            ]
-                        };*/
-                        /*
-                        var institutionOption = {
-                            title : {
-                                text: 'Kasus Korupsi Berdasarkan Instansi',
-                                subtext: 'Jumlah Kasus Pada Semester I 2014',
-                                textStyle : {
-                                    fontFamily : "'Lora', serif",
-                                },
-                                subtextStyle : {
-                                    fontFamily : "'Lora', serif",
-                                }
-                            },
-                            tooltip : {
-                                trigger: 'axis',
-                                axisPointer : { 
-                                    type : 'shadow'
-                                },
-                            },
-                            toolbox: {
-                                show : false,
-                                feature : {
-                                    mark : {show: true},
-                                    dataView : {show: true, readOnly: false},
-                                    magicType: {show: true, type: ['line', 'bar']},
-                                    restore : {show: true},
-                                    saveAsImage : {show: true}
-                                }
-                            },
-                            calculable : true,
-                            xAxis : [
-                                {
-                                    type : 'value',
-                                    boundaryGap : [0, 0.01],
-                                    axisLabel : {
-                                        textStyle : {
-                                            fontFamily : "'Lora', serif",
-                                        }
-                                    }
-                                }
-                            ],
-                            yAxis : [
-                                {
-                                    type : 'category',
-                                    data : ['Pajak','KY','Bank','Koperasi','Dispenda','Dinperindag','PNPM','Bappeda','BUMD','Disnakertrans','Penegak\nHukum','Kesehatan','Dinas\n(lain-lain)','Non\nPemerintah','Kelautan\ndan Perikanan','Dinas\nKesehatan','Dishubkominfo','Pendidikan','BUMN','ESDM','Badan\nPemerintahan','Dinas\nPendidikan','Kementrian','DPU','DPRD','Pemda'],
-                                    axisLabel : {
-                                        textStyle : {
-                                            fontFamily : "'Lora', serif",
-                                        }
-                                    }
-                               }
-                            ],
-                            grid : {
-                                x : 100,
-                                x2 : 20,
-                            },
-                            series : [
-                                {
-                                    //name:'2011年',
-                                    type:'bar',
-                                    data:[1,1,2,2,3,3,3,4,4,4,4,5,6,7,8,8,9,13,13,14,18,19,19,20,21,97],
-                                    itemStyle: {
-                                        normal:{color:'indianred'}
-                                    },
-                                }
-                            ]
-                        };*/
-
-
-
-                        // option = {
-                        //     backgroundColor: '#404a59',
-                        //     title : {
-                        //         text: 'World Population (2011)',
-                        //         subtext: 'From Gapminder',
-                        //         left: 'center',
-                        //         top: 'top',
-                        //         textStyle: {
-                        //             color: '#fff'
-                        //         }
-                        //     },
-                        //     tooltip : {
-                        //         trigger: 'item',
-                        //         formatter : function (params) {
-                        //             var value = (params.value + '').split('.');
-                        //             value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,')
-                        //                     + '.' + value[1];
-                        //             return params.seriesName + '<br/>' + params.name + ' : ' + value;
-                        //         }
-                        //     },
-                        //     visualMap: {
-                        //         show: false,
-                        //         min: 0,
-                        //         max: max,
-                        //         inRange: {
-                        //             symbolSize: [6, 60]
-                        //         }
-                        //     },
-                        //     geo: {
-                        //         name: 'World Population (2010)',
-                        //         type: 'map',
-                        //         map: 'world',
-                        //         roam: true,
-                        //         label: {
-                        //             emphasis: {
-                        //                 show: false
-                        //             }
-                        //         },
-                        //         itemStyle: {
-                        //             normal: {
-                        //                 areaColor: '#323c48',
-                        //                 borderColor: '#111'
-                        //             },
-                        //             emphasis: {
-                        //                 areaColor: '#2a333d'
-                        //             }
-                        //         }
-                        //     },
-                        //     series : [
-                        //         {
-                        //             type: 'scatter',
-                        //             coordinateSystem: 'geo',
-                        //             data: mapData.map(function (itemOpt) {
-                        //                 return {
-                        //                     name: itemOpt.name,
-                        //                     value: [
-                        //                         latlong[itemOpt.code].longitude,
-                        //                         latlong[itemOpt.code].latitude,
-                        //                         itemOpt.value
-                        //                     ],
-                        //                     label: {
-                        //                         emphasis: {
-                        //                             position: 'right',
-                        //                             show: true
-                        //                         }
-                        //                     },
-                        //                     itemStyle: {
-                        //                         normal: {
-                        //                             color: itemOpt.color
-                        //                         }
-                        //                     }
-                        //                 };
-                        //             })
-                        //         }
-                        //     ]
-                        // };
-
 
                         $.get('assets/js/geojson.json', function(geoJson) {
 
@@ -693,9 +355,8 @@ $.ajax({
                                 institutionChart.setOption(institutionOption);*/
 
 
-                    }
+                    
                 });
-            }
+            
         });
-    }
 });

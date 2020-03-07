@@ -203,3 +203,13 @@ td.country-count {
 .info a {
   color: #eee;
 }
+
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+.dimgray {
+  color: dimgray;
+}
