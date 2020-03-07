@@ -10,23 +10,16 @@ h1 {
 b {
     color: #b20e10;
 }
-.col-md-12 {
-    padding-left:10px;
-	padding-right:10px;
-}
+
 .outer-container {
-    min-width: 1520px;
 }
-.secondary {
-    height:600px;
-}
-.col-md-4 {
-    height: 600px;
+.row {
+    margin-left:0;
+    margin-right: 0;
 }
 .header {
     text-align:center;
 }
-
 .header .description {
     padding-top: 20px;
 }
@@ -38,11 +31,6 @@ b {
     width:  100%;
     font-weight: bold;
 }
-.main {
-
-}
-
-
 
 .box, .total-infected, .total-death, .total-confirmed, .total-recovered {
     float:left;
@@ -64,7 +52,7 @@ b {
     width:  160px
 }
 .box {
-    margin: 10px;
+    margin: 10px 5px;
     width:  500px;
 }
 
@@ -129,7 +117,7 @@ td.country-count {
     padding : 20px 0;
 }
 
-.data-source{
+.footer {
     color : #aaa;
     font-size : 12px;
 }
