@@ -64,54 +64,74 @@ function processData(allText) {
     var max = 0
     var sum = 0
     var prevSum = 0
+    var infected_count = 0
+    var last_week_infected_count = 0
+    var infected_countries = {}
+    var last_week_infected_countries = {}
     //var headings = entries.splice(0,record_num);
     while (allTextLines.length > 0) {
         entries = splitCSVButIgnoreCommasInDoublequotes(allTextLines[0])
-        while (entries.length > 0) {
-            var tarr = [];
-            var prov = entries.shift()
-            if (prov == undefined || prov == '') {
-                prov = ''
-            } else {
-                prov = prov.replace(/['"]+/g, '') + " - "
-            }
-            var cnt = entries.shift()
-            if (cnt == undefined) {
-                cnt = ''
-            } else {
-                cnt = cnt.replace(/['"]+/g, '')
-            }
-            var _name = prov + cnt
-            var loc = []
-            loc.unshift(parseFloat(entries.shift()))
-            loc.unshift(parseFloat(entries.shift()))
-            var latest = 0
-            var prev = 0
-            for (var j = 4; j < record_num; j++) {
-                num = parseFloat(entries.shift())
-                if (Number.isNaN(num) == false) {
-                    prev = latest
-                    latest = num;
-                }
-            }
-            if (latest > max) {
-                max = latest
-            }
-            if (!Number.isNaN(loc[0]) && !Number.isNaN(loc[1])) {
-                dat.push({
-                    name: _name,
-                    value: latest
-                })
-                dat_dict[_name] = latest
-                coord[_name] = loc
+        
+        var tarr = [];
+        var prov = entries.shift()
+        if (prov == undefined || prov == '') {
+            prov = ''
+        } else {
+            prov = prov.replace(/['"]+/g, '') + " - "
+        }
+        var cnt = entries.shift()
+        if (cnt == undefined) {
+            cnt = ''
+        } else {
+            cnt = cnt.replace(/['"]+/g, '')
+        }
+        var _name = prov + cnt
+        var loc = []
+        loc.unshift(parseFloat(entries.shift()))
+        loc.unshift(parseFloat(entries.shift()))
+        var latest = 0
+        var prev = 0
 
-                sum += latest
-                prevSum += prev
+        latest = parseFloat(entries[entries.length-1])
+        prev = parseFloat(entries[entries.length-2])
+        last_week = parseFloat(entries[entries.length-8])
+
+        if (Number.isNaN(latest)) {
+            latest = 0;
+        }
+        if (Number.isNaN(prev)) {
+            prev = 0;
+        }
+        if (Number.isNaN(last_week)) {
+            last_week = 0;
+        }
+
+        if (latest > max) {
+            max = latest
+        }
+        if (!Number.isNaN(loc[0]) && !Number.isNaN(loc[1])) {
+            dat.push({
+                name: _name,
+                value: latest
+            })
+            dat_dict[_name] = latest
+            coord[_name] = loc
+
+            sum += latest
+            prevSum += prev
+            if (latest != 0 && infected_countries[cnt] == undefined && cnt != 'Others') {
+                infected_count += 1
+                infected_countries[cnt] = 1
+            }
+            if (last_week != 0 && last_week_infected_countries[cnt] == undefined && cnt != 'Others') {
+                last_week_infected_count += 1
+                last_week_infected_countries[cnt] = 1
             }
         }
+        
         allTextLines.shift()
     }
-    return [dat, coord, max, dat_dict, sum, sum-prevSum]
+    return [dat, coord, max, dat_dict, sum, sum-prevSum, infected_count, infected_count-last_week_infected_count]
 
 };
 
@@ -155,6 +175,8 @@ $.ajax({
                         var max = values[2]
                         var total_confirmed = values[4]
                         var total_confirmed_changes = values[5]
+                        var total_infected_count = values[6]
+                        var infected_count_changes = values[7]
 
                         var values = processData(death);
                         var death_data = values[3]
@@ -370,6 +392,12 @@ $.ajax({
 
                         var recovered_changes = document.getElementById("total-recovered-changes-count")  
                         recovered_changes.innerHTML = "+"+total_recovered_changes
+
+                        var infected_count = document.getElementById("total-infected-count")  
+                        infected_count.innerHTML = total_infected_count
+
+                        var infected_changes = document.getElementById("total-infected-changes-count")  
+                        infected_changes.innerHTML = "+"+infected_count_changes
 
                         // var mapChart = ec.init(document.getElementById('map'));
                         //mapChart.setOption(mapOption);
