@@ -68,6 +68,8 @@ function processData(allText) {
     var last_week_infected_count = 0
     var infected_countries = {}
     var last_week_infected_countries = {}
+    var last_30_days_sums = []
+    for (var i = 0; i < 30; i++) last_30_days_sums[i] = 0;
     //var headings = entries.splice(0,record_num);
     while (allTextLines.length > 0) {
         entries = splitCSVButIgnoreCommasInDoublequotes(allTextLines[0])
@@ -106,27 +108,35 @@ function processData(allText) {
             last_week = 0;
         }
 
-        if (latest > max) {
-            max = latest
-        }
         if (!Number.isNaN(loc[0]) && !Number.isNaN(loc[1])) {
+
+            for (var i = 30; i>=1; i--) {
+                var num = parseFloat(entries[entries.length-i])
+                if (Number.isNaN(num)){
+                    num = 10;
+                }
+                last_30_days_sums[30-i] += num
+            }
+
+            if (num > max) {
+                max = num
+            }
+
             dat.push({
                 name: _name,
-                value: latest
+                value: num
             })
-            dat_dict[_name] = latest
+            dat_dict[_name] = num
             coord[_name] = loc
 
-            sum += latest
-            prevSum += prev
-            if (latest != 0 && infected_countries[cnt] == undefined && cnt != 'Others') {
+            if (num != 0 && infected_countries[cnt] == undefined && cnt != 'Others') {
                 infected_count += 1
-                infected_countries[cnt] = latest
+                infected_countries[cnt] = num
             }else {
                 if (infected_countries[cnt] == undefined){
-                    infected_countries[cnt] = latest
+                    infected_countries[cnt] = num
                 }else{
-                    infected_countries[cnt] += latest
+                    infected_countries[cnt] += num
                 }
             }
 
@@ -138,7 +148,7 @@ function processData(allText) {
         
         allTextLines.shift()
     }
-    return [dat, coord, max, dat_dict, sum, sum-prevSum, infected_count, infected_count-last_week_infected_count, infected_countries]
+    return [dat, coord, max, dat_dict, last_30_days_sums[29], last_30_days_sums[29]-last_30_days_sums[28], infected_count, infected_count-last_week_infected_count, infected_countries, last_30_days_sums, headings]
 
 };
 
@@ -190,6 +200,14 @@ $.ajax({
                         var total_infected_count = values[6]
                         var infected_count_changes = values[7]
                         var infected_countries = values[8]
+                        var last_30_confirmed = values[9]
+                        var headers = values[10]
+
+                        xlabels = []
+                        for (var i = headers.length-1; i>= headers.length-30; i--) {
+                            xlabels.unshift(headers[i])
+                        }
+                        console.log(xlabels)
 
                         // exclude Others country
                         infected_countries['Others'] = 0
@@ -205,11 +223,13 @@ $.ajax({
                         var death_data = values[3]
                         var total_death = values[4]
                         var total_death_changes = values[5]
+                        var last_30_death = values[9]
 
                         var values = processData(recovered);
                         var recovered_data = values[3]
                         var total_recovered = values[4]
                         var total_recovered_changes = values[5]
+                        var last_30_recovered = values[9]
 
 
                         var mapOption = {
@@ -336,8 +356,6 @@ $.ajax({
                         });
 
 
-
-
                         option = {
 
                             tooltip: {
@@ -359,10 +377,12 @@ $.ajax({
                             },
                             xAxis: {
                                 type: 'category',
-                                boundaryGap: false,
-                                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                                boundaryGap: true,
+                                data: xlabels,
                                 axisLabel: {
-                                    color: '#eee'
+                                    color: '#eee',
+                                    interval: 4,
+                                    showMaxLabel: true
                                 }
                             },
                             yAxis: {
@@ -375,19 +395,19 @@ $.ajax({
                                     name: 'confirmed',
                                     type: 'line',
                                     color: 'red',
-                                    data: [120, 132, 101, 134, 90, 230, 210]
+                                    data: last_30_confirmed
                                 },
                                 {
                                     name: 'recovered',
                                     type: 'line',
                                     color: 'green',
-                                    data: [220, 182, 191, 234, 290, 330, 310]
+                                    data: last_30_recovered
                                 },
                                 {
                                     name: 'deaths',
                                     type: 'line',
                                     color: 'dimgray',
-                                    data: [150, 232, 201, 154, 190, 330, 410]
+                                    data: last_30_death
                                 }
                             ]
                         };
