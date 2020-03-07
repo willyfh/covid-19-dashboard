@@ -255,7 +255,7 @@ $.ajax({
                                     if (params.value == '-') {
                                         return '-';
                                     } else {
-                                        return "Location: " + params.name + '<br/>Confirmed : <span class="red">' + value+ '</span><br/>Recovered : <span class="green">' + recovered_data[params.name]+ '</span><br/>Deaths : <span class="dimgray">' + death_data[params.name]+"</span>";
+                                        return params.name + '<br/>Confirmed : <span class="red">' + value+ '</span><br/>Recovered : <span class="green">' + recovered_data[params.name]+ '</span><br/>Deaths : <span class="dimgray">' + death_data[params.name]+"</span>";
                                     }
                                 }
                             },
