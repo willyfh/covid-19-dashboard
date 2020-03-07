@@ -144,7 +144,8 @@ $.ajax({
             top: 10,
             left: 10,
             textStyle: {
-                color: '#eee'
+                color: '#eee',
+                fontSize: 16
             }
         },
             tooltip : {

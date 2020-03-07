@@ -23,13 +23,22 @@ b {
 .header .description {
     padding-top: 20px;
 }
-.title {
+.header-bar {
     background-color: #333;
     color: #eee;
-    padding: 10px;
+    padding: 15px;
     font-size : 25px;
     width:  100%;
     font-weight: bold;
+    overflow: auto;
+}
+.info {
+    font-size: 16px;
+    float: right;
+    line-height: 36px;
+}
+.title {
+    float: left;
 }
 
 .box, .total-infected, .total-death, .total-confirmed, .total-recovered {
@@ -52,7 +61,7 @@ b {
     width:  160px
 }
 .box {
-    margin: 10px 5px;
+    margin: 8px 5px;
     width:  500px;
 }
 
@@ -117,7 +126,7 @@ td.country-count {
     padding : 20px 0;
 }
 .footer {
-  padding: 10px;
+  padding: 15px;
 }
 .credits {
     color : #aaa;
@@ -143,4 +152,15 @@ td.country-count {
     float: left;
     height: 300px;
     width:  500px;
+}
+.linkedin {
+    background-image: url(../images/icon-linkedin.png);
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    padding-left: 30px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.info a {
+    color: #eee;
 }
