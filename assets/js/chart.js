@@ -293,7 +293,7 @@ $.ajax({
                                 calculable: false,
                                 textStyle: {
                                     fontFamily: "'Lora', serif",
-                                    color: "#ccc"
+                                    color: "#eee"
                                 }
                             },
                             geo: {
@@ -448,7 +448,7 @@ $.ajax({
         }).fail(function() {
             alert("Failed to retrieve data.");
         });
-        
+
 }).fail(function() {
     alert("Failed to retrieve data.");
 });
