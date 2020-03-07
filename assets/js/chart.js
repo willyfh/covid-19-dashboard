@@ -121,8 +121,15 @@ function processData(allText) {
             prevSum += prev
             if (latest != 0 && infected_countries[cnt] == undefined && cnt != 'Others') {
                 infected_count += 1
-                infected_countries[cnt] = 1
+                infected_countries[cnt] = latest
+            }else {
+                if (infected_countries[cnt] == undefined){
+                    infected_countries[cnt] = latest
+                }else{
+                    infected_countries[cnt] += latest
+                }
             }
+
             if (last_week != 0 && last_week_infected_countries[cnt] == undefined && cnt != 'Others') {
                 last_week_infected_count += 1
                 last_week_infected_countries[cnt] = 1
@@ -131,7 +138,7 @@ function processData(allText) {
         
         allTextLines.shift()
     }
-    return [dat, coord, max, dat_dict, sum, sum-prevSum, infected_count, infected_count-last_week_infected_count]
+    return [dat, coord, max, dat_dict, sum, sum-prevSum, infected_count, infected_count-last_week_infected_count, infected_countries]
 
 };
 
@@ -171,12 +178,28 @@ $.ajax({
                 }).done(function(recovered) {
                         var values = processData(confirmed);
                         var data = values[0]
+
+                        data.sort(function (a, b) {
+                            return b.value - a.value;
+                        })
+
                         var geoCoordMap = values[1]
                         var max = values[2]
                         var total_confirmed = values[4]
                         var total_confirmed_changes = values[5]
                         var total_infected_count = values[6]
                         var infected_count_changes = values[7]
+                        var infected_countries = values[8]
+
+                        // exclude Others country
+                        infected_countries['Others'] = 0
+                        var sortedCountries = [];
+                        for (var country in infected_countries) {
+                            sortedCountries.push([country, infected_countries[country]]);
+                        }
+                        sortedCountries.sort(function(a, b) {
+                            return b[1] - a[1];
+                        });
 
                         var values = processData(death);
                         var death_data = values[3]
@@ -188,7 +211,6 @@ $.ajax({
                         var total_recovered = values[4]
                         var total_recovered_changes = values[5]
 
-                        console.log(recovered_data)
 
                         var mapOption = {
                             backgroundColor: '#111',
@@ -396,8 +418,15 @@ $.ajax({
                         var infected_count = document.getElementById("total-infected-count")  
                         infected_count.innerHTML = total_infected_count
 
-                        var infected_changes = document.getElementById("total-infected-changes-count")  
+                        var infected_changes = document.getElementById("total-infected-changes-count")
                         infected_changes.innerHTML = "+"+infected_count_changes
+
+                        for (var i=1; i <= 10; i++) {
+                            var country_count = document.getElementById("country-count-"+i)
+                            var country_name = document.getElementById("country-name-"+i)
+                            country_count.innerHTML = sortedCountries[i][1]
+                            country_name.innerHTML = sortedCountries[i][0]
+                        }
 
                         // var mapChart = ec.init(document.getElementById('map'));
                         //mapChart.setOption(mapOption);
