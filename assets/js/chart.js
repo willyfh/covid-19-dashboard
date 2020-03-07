@@ -243,7 +243,7 @@ $.ajax({
 
                             title: {
                                 text: 'Confirmed Case Map',
-                                subtext: 'Data source: https://github.com/CSSEGISandData/COVID-19',
+                                subtext: 'Last update: '+new Date(xlabels[29]).toDateString(),
                                 top: 10,
                                 left: 10,
                                 textStyle: {
