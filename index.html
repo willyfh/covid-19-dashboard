@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<title>Novel Coronavirus (COVID-19) Dashboard</title>
+    <title>Novel Coronavirus (COVID-19) Dashboard</title>
 
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
-	<link href="assets/css/main.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -17,122 +18,152 @@
     <![endif]-->
 
     <script src="assets/js/echarts.min.js"></script>
-	
+
 </head>
+
 <body>
-	<div class="outer-container">
-		<div class="header-bar">
-			<div class="title">
-				Novel Coronavirus (COVID-19) Dashboard
-			</div>
-			<div class="info"><a href="https://www.linkedin.com/in/willyfitrahendria/">
-				<span class="linkedin">Willy Fitra Hendria</span></a>
-			</div>
-			<!--<div class="description col-md-6">
+    <div class="outer-container">
+        <div class="header-bar">
+            <div class="title">
+                Novel Coronavirus (COVID-19) Dashboard
+            </div>
+            <div class="info">
+                <a href="https://www.linkedin.com/in/willyfitrahendria/">
+                    <span class="linkedin">Willy Fitra Hendria</span></a>
+            </div>
+            <!--<div class="description col-md-6">
 				<p>
 					Korupsi merupakan salah satu persoalan terbesar bangsa Indonesia.
 					Rata-rata kerugian negara akibat korupsi mencapai 11 triliun per tahun.
 					Sebenarnya wilayah apa saja yang banyak terlibat kasus korupsi?
 				</p>
 			</div>-->
-		</div>
-		<div class="main row">
-			<div class="main content">
-				<div id="map"></div>
-					<div class='box'>
-							<div class='total-infected'>
-								<div class='total-infected-label'>
-										Infected Countries
-									</div>
-									<div class='total-infected-count'>
-										90
-									</div>
-									<div class='total-infected-changes'>
-										<div class='last-7-count'>+0</div>
-										<div class='last-7-day-label'>in the last 7 days</div>
-									</div>
-								</div>
-								<div class='top-infected'>
-									<div class='top-infected-list'>
-										<table>
-											<tr><td class='country-count'>50000</td><td class='country-name'>China</td></tr>
-											<tr><td class='country-count'>5000</td><td class='country-name'>South Korea</td></tr>
-											<tr><td class='country-count'>5000</td><td class='country-name'>China</td></tr>
-											<tr><td class='country-count'>5000</td><td class='country-name'>South Korea</td></tr>
-											<tr><td class='country-count'>500</td><td class='country-name'>South Korea</td></tr>
-										</table>
-									</div>
-									<div class='top-infected-list-2'>
-										<table>
-											<tr><td class='country-count'>50000</td><td class='country-name'>China</td></tr>
-											<tr><td class='country-count'>5000</td><td class='country-name'>South Korea</td></tr>
-											<tr><td class='country-count'>5000</td><td class='country-name'>China</td></tr>
-											<tr><td class='country-count'>5000</td><td class='country-name'>South Korea</td></tr>
-											<tr><td class='country-count'>500</td><td class='country-name'>South Korea</td></tr>
-										</table>
-									</div>
-								</div>
-					</div>
+        </div>
+        <div class="main row">
+            <div class="main content">
+                <div id="map"></div>
+                <div class='box'>
+                    <div class='total-infected'>
+                        <div class='total-infected-label'>
+                            Infected Countries
+                        </div>
+                        <div class='total-infected-count'>
+                            90
+                        </div>
+                        <div class='total-infected-changes'>
+                            <div class='last-7-count'>+0</div>
+                            <div class='last-7-day-label'>in the last 7 days</div>
+                        </div>
+                    </div>
+                    <div class='top-infected'>
+                        <div class='top-infected-list'>
+                            <table>
+                                <tr>
+                                    <td class='country-count'>50000</td>
+                                    <td class='country-name'>China</td>
+                                </tr>
+                                <tr>
+                                    <td class='country-count'>5000</td>
+                                    <td class='country-name'>South Korea</td>
+                                </tr>
+                                <tr>
+                                    <td class='country-count'>5000</td>
+                                    <td class='country-name'>China</td>
+                                </tr>
+                                <tr>
+                                    <td class='country-count'>5000</td>
+                                    <td class='country-name'>South Korea</td>
+                                </tr>
+                                <tr>
+                                    <td class='country-count'>500</td>
+                                    <td class='country-name'>South Korea</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class='top-infected-list-2'>
+                            <table>
+                                <tr>
+                                    <td class='country-count'>50000</td>
+                                    <td class='country-name'>China</td>
+                                </tr>
+                                <tr>
+                                    <td class='country-count'>5000</td>
+                                    <td class='country-name'>South Korea</td>
+                                </tr>
+                                <tr>
+                                    <td class='country-count'>5000</td>
+                                    <td class='country-name'>China</td>
+                                </tr>
+                                <tr>
+                                    <td class='country-count'>5000</td>
+                                    <td class='country-name'>South Korea</td>
+                                </tr>
+                                <tr>
+                                    <td class='country-count'>500</td>
+                                    <td class='country-name'>South Korea</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
 
-					<div class='box'>
-						<!--<div class='box-title'>Total</div>-->
-						<div class='total-content'>
-								<div class='total-confirmed'>
-										<div class='total-confirmed-label'>
-												confirmed cases
-										</div>
-										<div class='total-confirmed-count'>
-												100000
-										</div>
-										<div class='total-confirmed-changes'>
-												<div class='vs-prev-day-count'>+50</div>
-												<div class='vs-prev-day-label'>vs previous day</div>
-										</div>
-								</div>
-								<div class='total-recovered'>
-										<div class='total-recovered-label'>
-												recovered
-										</div>
-										<div class='total-recovered-count'>
-												50000
-										</div>
-										<div class='total-recovered-changes'>
-												<div class='vs-prev-day-count'>+50</div>
-												<div class='vs-prev-day-label'>vs previous day</div>
-										</div>
-								</div>
-								<div class='total-death'>
-										<div class='total-death-label'>
-												deaths
-										</div>
-										<div class='total-death-count'>
-												2000
-										</div>
-										<div class='total-death-changes'>
-												<div class='vs-prev-day-count'>+50</div>
-												<div class='vs-prev-day-label'>vs previous day</div>
-										</div>
-								</div>
-							</div>
-						</div> <!-- end total -->
+                <div class='box'>
+                    <!--<div class='box-title'>Total</div>-->
+                    <div class='total-content'>
+                        <div class='total-confirmed'>
+                            <div class='total-confirmed-label'>
+                                confirmed cases
+                            </div>
+                            <div class='total-confirmed-count'>
+                                100000
+                            </div>
+                            <div class='total-confirmed-changes'>
+                                <div class='vs-prev-day-count'>+50</div>
+                                <div class='vs-prev-day-label'>vs previous day</div>
+                            </div>
+                        </div>
+                        <div class='total-recovered'>
+                            <div class='total-recovered-label'>
+                                recovered
+                            </div>
+                            <div class='total-recovered-count'>
+                                50000
+                            </div>
+                            <div class='total-recovered-changes'>
+                                <div class='vs-prev-day-count'>+50</div>
+                                <div class='vs-prev-day-label'>vs previous day</div>
+                            </div>
+                        </div>
+                        <div class='total-death'>
+                            <div class='total-death-label'>
+                                deaths
+                            </div>
+                            <div class='total-death-count'>
+                                2000
+                            </div>
+                            <div class='total-death-changes'>
+                                <div class='vs-prev-day-count'>+50</div>
+                                <div class='vs-prev-day-label'>vs previous day</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end total -->
 
-						<div class='box'>
-								<div class='box-title'>Last 30 Days (Cumulative)</div>
-								<div id="scatter-plot" class="scatter-plot"></div>
-						</div>
-				</div>
-			</div>
-				<div class="footer">
-			 		<span class="credits">All data copyright 2020 Johns Hopkins University, all rights reserved, is provided to the public strictly for educational and academic research purposes. The Website relies upon publicly available data from multiple sources, that do not always agree. The Johns Hopkins University hereby disclaims any and all representations and warranties with respect to the Website, including accuracy, fitness for use, and merchantability. Reliance on the Website for medical guidance or use of the Website in commerce is strictly prohibited.</span>
-			</div>
-		</div>
+                <div class='box'>
+                    <div class='box-title'>Last 30 Days (Cumulative)</div>
+                    <div id="scatter-plot" class="scatter-plot"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <span class="credits">All data copyright 2020 Johns Hopkins University, all rights reserved, is provided to the public strictly for educational and academic research purposes. The Website relies upon publicly available data from multiple sources, that do not always agree. The Johns Hopkins University hereby disclaims any and all representations and warranties with respect to the Website, including accuracy, fitness for use, and merchantability. Reliance on the Website for medical guidance or use of the Website in commerce is strictly prohibited.</span>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="assets/js/chart.js"></script>
 
-
-	</div>
-
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="assets/js/chart.js"></script>
-	
 </body>
+
 </html>
