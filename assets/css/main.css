@@ -298,7 +298,7 @@ td.country-count {
 
 @media(max-width: 360px) {
   .total-infected-label, .total-confirmed-label, .total-death-label, .total-recovered-label {
-    font-size: 16px;
+    font-size: 12px;
   }
   .total-confirmed-count, .total-death-count, .total-recovered-count {
     font-size:  20px;
@@ -307,9 +307,9 @@ td.country-count {
     font-size: 25px;
   }
   .top-infected-list, .top-infected-list-2 {
-    font-size:  12px;
+    font-size:  10px;
   }
   .total-infected-changes, .total-confirmed-changes, .total-death-changes, .total-recovered-changes {
-    font-size:  10px;
+    font-size:  9px;
   }
 }
