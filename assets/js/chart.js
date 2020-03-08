@@ -87,8 +87,8 @@ $.ajax({
                 backgroundColor: '#111',
 
                 title: {
-                    text: 'Confirmed Case Map',
-                    subtext: 'Last update: ' + new Date(xlabels[29]).toDateString(),
+                    text: '',
+                    subtext: 'Updated daily. Last update: ' + new Date(xlabels[29]).toDateString(),
                     top: 10,
                     left: 10,
                     textStyle: {
