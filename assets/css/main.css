@@ -295,3 +295,15 @@ td.country-count {
     padding-left: 0;
   }
 }
+
+@media(max-width: 360px) {
+  .total-infected-label, .total-confirmed-label, .total-death-label, .total-recovered-label {
+    font-size: 16px;
+  }
+  .total-confirmed-count, .total-death-count, .total-recovered-count {
+    font-size:  20px;
+  }
+  .total-infected-count {
+    font-size: 25px;
+  }
+}
