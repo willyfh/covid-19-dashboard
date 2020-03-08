@@ -258,7 +258,7 @@ $.ajax({
                                     if (params.value == '-') {
                                         return '-';
                                     } else {
-                                        return params.name + '<br/>Confirmed : <span class="red">' + formatNumber(value)+ '</span><br/>Recovered : <span class="green">' + formatNumber(recovered_data[params.name])+ '</span><br/>Deaths : <span class="dimgray">' + formatNumber(death_data[params.name])+"</span>";
+                                        return params.name + '<br/>Confirmed : <span class="red">' + formatNumber(value)+ '</span><br/>Recovered : <span class="green">' + formatNumber(recovered_data[params.name])+ '</span><br/>Deaths : <span class="mediumpurple">' + formatNumber(death_data[params.name])+"</span>";
                                     }
                                 }
                             },
@@ -401,13 +401,13 @@ $.ajax({
                                 {
                                     name: 'recovered',
                                     type: 'line',
-                                    color: 'green',
+                                    color: 'limegreen',
                                     data: last_30_recovered
                                 },
                                 {
                                     name: 'deaths',
                                     type: 'line',
-                                    color: 'dimgray',
+                                    color: 'mediumpurple',
                                     data: last_30_death
                                 }
                             ]

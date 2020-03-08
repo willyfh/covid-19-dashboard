@@ -141,11 +141,11 @@ td.country-count {
 }
 
 .total-death-count {
-  color: dimgray;
+  color: mediumpurple;
 }
 
 .total-recovered-count {
-  color: green;
+  color: limegreen;
 }
 
 .total-infected-changes,
@@ -215,10 +215,10 @@ td.country-count {
   color: red;
 }
 .green {
-  color: green;
+  color: limegreen;
 }
-.dimgray {
-  color: dimgray;
+.mediumpurple {
+  color: mediumpurple;
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
