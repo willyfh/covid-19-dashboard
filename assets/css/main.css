@@ -180,6 +180,9 @@ td.country-count {
   color: #aaa;
   font-size: 12px;
 }
+.data-source {
+  padding-bottom: 10px;
+}
 .data-source a {
   color: white;
 }
