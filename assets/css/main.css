@@ -306,4 +306,10 @@ td.country-count {
   .total-infected-count {
     font-size: 25px;
   }
+  .top-infected-list, .top-infected-list-2 {
+    font-size:  12px;
+  }
+  .total-infected-changes, .total-confirmed-changes, .total-death-changes, .total-recovered-changes {
+    font-size:  10px;
+  }
 }
