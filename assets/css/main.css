@@ -180,6 +180,12 @@ td.country-count {
   color: #aaa;
   font-size: 12px;
 }
+.data-source a {
+  color: white;
+}
+.data-source a:hover {
+  color: red;
+}
 
 #map {
   height: 600px;
