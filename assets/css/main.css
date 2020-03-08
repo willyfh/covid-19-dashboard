@@ -44,8 +44,11 @@ b {
   line-height: 36px;
 }
 
-.title {
+.title, .title-1, .title-2 {
   float: left;
+}
+.title-2 {
+  padding-left: 6px;
 }
 .main-content-wrapper {
   overflow: auto;
@@ -168,10 +171,12 @@ td.country-count {
 
 .footer {
   padding: 0 15px;
+}
+.credits {
   text-align: justify;
 }
 
-.credits {
+.footer {
   color: #aaa;
   font-size: 12px;
 }
@@ -260,7 +265,7 @@ td.country-count {
   .total-infected-count {
     font-size: 32px;
   }
-  .credits {
+  .footer {
     font-size: 10px; 
   }
   .scatter-plot {
@@ -284,5 +289,9 @@ td.country-count {
     padding-left: 1%;
     padding-right: 1%;
     float:none;
+  }
+  .title-1, .title-2 {
+    float: none;
+    padding-left: 0;
   }
 }
