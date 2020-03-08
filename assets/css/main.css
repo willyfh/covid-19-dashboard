@@ -193,7 +193,7 @@ td.country-count {
   float: left;
   height: 300px;
   width: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 
 
