@@ -14,10 +14,9 @@ b {
   color: #b20e10;
 }
 .outer-container {
-  min-width: 720px;
-  max-width: 1600px;
+  max-width: 1600px
 }
-.row {
+.main-content-wrapper {
   margin-left: 0;
   margin-right: 0;
 }
@@ -49,7 +48,9 @@ b {
 .title {
   float: left;
 }
-
+.main-content-wrapper {
+  overflow: auto;
+}
 .box,
 .total-infected,
 .total-death,
@@ -59,31 +60,35 @@ b {
   color: #eee;
   text-align: center;
 }
-
+.total-infected {
+  width: 33%;
+}
 .top-infected {
-  padding-left: 20px;
+  width: 66%;
+  padding-left: 1%;
+  overflow: auto;
 }
 
 .top-infected-list,
 .top-infected-list-2 {
   text-align: left;
   float: left;
+  width:  49%;
 }
 
 .top-infected-list-2 {
-  padding-left: 40px;
+  padding-left: 2%;
 }
 
-.total-infected,
 .total-death,
 .total-confirmed,
 .total-recovered {
-  width: 160px
+  width: 33%;
 }
 
 .box {
-  margin: 8px 5px;
-  width: 500px;
+  margin: 8px 0;
+  width: 100%;
 }
 
 .box-title {
@@ -151,6 +156,7 @@ td.country-count {
   font-size: 12px;
 }
 
+.tota-infected-label,
 .total-confirmed-label,
 .total-death-label,
 .total-recovered-label {
@@ -163,6 +169,7 @@ td.country-count {
 
 .footer {
   padding: 0 15px;
+  text-align: justify;
 }
 
 .credits {
@@ -172,23 +179,24 @@ td.country-count {
 
 #map {
   height: 600px;
-  width: 100%;
+  width: 60%;
   margin-top: -2px;
   border: 2px solid #333;
-  max-width: 1000px;
   float: left;
 }
-
-.bar-chart {
-  height: 600px;
-  width: 100%;
+.right-side-bar {
+  width: 39%;
+  overflow: auto;
+  padding-left: 1%;
 }
 
 .scatter-plot {
   float: left;
   height: 300px;
-  width: 500px;
+  width: 100%;
+  overflow: auto;
 }
+
 
 .linkedin {
   background-image: url(../images/icon-linkedin.png);
@@ -211,4 +219,71 @@ td.country-count {
 }
 .dimgray {
   color: dimgray;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .total-infected-label, .total-confirmed-label, .total-death-label, .total-recovered-label {
+    font-size: 16px;
+  }
+  .scatter-plot {
+    height: 250px;
+  }
+  #map {
+    height: 530px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .total-infected-label, .total-confirmed-label, .total-death-label, .total-recovered-label {
+    font-size: 12px;
+  }
+  .top-infected-list, .top-infected-list-2 {
+    font-size:  10px;
+  }
+  .title {
+    font-size: 20px;
+  }
+  .info {
+    font-size: 13px;
+  }
+  .linkedin {
+    background-size: 20px 20px;
+  }
+  .box-title {
+    font-size: 14px;
+  }
+  .total-infected-changes, .total-confirmed-changes, .total-death-changes, .total-recovered-changes {
+    font-size:  9px;
+  }
+  .total-confirmed-count, .total-death-count, .total-recovered-count {
+    font-size: 23px;
+  }
+  .total-infected-count {
+    font-size: 32px;
+  }
+  .credits {
+    font-size: 10px; 
+  }
+  .scatter-plot {
+    height: 220px;
+    overflow: hidden;
+  }
+  #map {
+    height: 450px;
+  }
+}
+@media (max-width: 767px) {
+  #map {
+    width: 100%;
+  }
+  .title, .info {
+    float: none;
+    text-align: center;
+  }
+  .right-side-bar {
+    width: 98%;
+    padding-left: 1%;
+    padding-right: 1%;
+    float:none;
+  }
 }

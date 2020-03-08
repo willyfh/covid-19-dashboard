@@ -159,10 +159,14 @@ var convertData = function(data, geoCoordMap) {
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
-
+/*
 var url_confirmed = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"
 var url_death = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv"
 var url_recovered = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv"
+*/
+var url_confirmed = "/time_series_19-covid-Confirmed.csv";
+var url_death = "/time_series_19-covid-Deaths.csv";
+var url_recovered = "/time_series_19-covid-Recovered.csv";
 
 $.ajax({
     type: "GET",
@@ -207,7 +211,12 @@ $.ajax({
                         infected_countries['Others'] = 0
                         var sortedCountries = [];
                         for (var country in infected_countries) {
-                            sortedCountries.push([country, infected_countries[country]]);
+                            var country_name = country
+                            // special case
+                            if (country_name=='Mainland China'){
+                                country_name='China'
+                            }
+                            sortedCountries.push([country_name, infected_countries[country]]);
                         }
                         sortedCountries.sort(function(a, b) {
                             return b[1] - a[1];
@@ -370,10 +379,10 @@ $.ajax({
                             xAxis: {
                                 type: 'category',
                                 boundaryGap: true,
-                                data: xlabels,
+                                data: xlabels.map(function(x) {return x.slice(0, x.length-3)}),
                                 axisLabel: {
                                     color: '#eee',
-                                    interval: 4,
+                                    interval: 6,
                                     showMaxLabel: true
                                 }
                             },
