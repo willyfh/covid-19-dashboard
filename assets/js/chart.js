@@ -159,15 +159,15 @@ var convertData = function(data, geoCoordMap) {
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
-/*
+
 var url_confirmed = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"
 var url_death = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Deaths.csv"
 var url_recovered = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Recovered.csv"
-*/
-var url_confirmed = "/time_series_19-covid-Confirmed.csv";
+
+/*var url_confirmed = "/time_series_19-covid-Confirmed.csv";
 var url_death = "/time_series_19-covid-Deaths.csv";
 var url_recovered = "/time_series_19-covid-Recovered.csv";
-
+*/
 $.ajax({
     type: "GET",
     url: url_confirmed,
