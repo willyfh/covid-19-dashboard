@@ -57,6 +57,8 @@ $.ajax({
 
             // exclude Others country
             infected_countries['Others'] = 0
+            infected_countries['Cruise Ship'] = 0
+            
             var sortedCountries = [];
             for (var country in infected_countries) {
                 var country_name = country
@@ -386,6 +388,16 @@ function processData(allText) {
         } else {
             cnt = cnt.replace(/['"]+/g, '')
         }
+        if (cnt == "Mainland China") {
+            cnt = "China"
+        }
+        if (cnt == "Iran (Islamic Republic of)") {
+            cnt = "Iran"
+        }
+        if (cnt == "Republic of Korea" || cnt == "Korea, South") {
+            cnt = "South Korea"
+        }
+
         var _name = prov + cnt
         var loc = []
         loc.unshift(parseFloat(entries.shift()))
@@ -428,7 +440,7 @@ function processData(allText) {
             dat_dict[_name] = num
             coord[_name] = loc
 
-            if (num != 0 && infected_countries[cnt] == undefined && cnt != 'Others') {
+            if (num != 0 && infected_countries[cnt] == undefined && cnt != 'Others' && cnt != 'Cruise Ship') {
                 infected_count += 1
                 infected_countries[cnt] = num
             } else {
@@ -439,7 +451,7 @@ function processData(allText) {
                 }
             }
 
-            if (last_week != 0 && last_week_infected_countries[cnt] == undefined && cnt != 'Others') {
+            if (last_week != 0 && last_week_infected_countries[cnt] == undefined && cnt != 'Others' && cnt !='Cruise Ship') {
                 last_week_infected_count += 1
                 last_week_infected_countries[cnt] = 1
             }
@@ -447,6 +459,22 @@ function processData(allText) {
 
         allTextLines.shift()
     }
+    var holder = {};
+
+    dat.forEach(function(d) {
+      if (holder.hasOwnProperty(d.name)) {
+        holder[d.name] = holder[d.name] + d.value;
+      } else {
+        holder[d.name] = d.value;
+      }
+    });
+
+    var dat = [];
+
+    for (var prop in holder) {
+      dat.push({ name: prop, value: holder[prop] });
+    }
+
     return [dat, coord, max, dat_dict, last_30_days_sums[29], last_30_days_sums[29] - last_30_days_sums[28], infected_count, infected_count - last_week_infected_count, infected_countries, last_30_days_sums, headings]
 
 };
